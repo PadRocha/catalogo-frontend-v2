@@ -1,18 +1,30 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home.component';
+import { RouterModule, Routes } from '@angular/router';
+import { CreatePDFComponent, HomeComponent } from './pages';
 
 const routes: Routes = [
   {
-    path: 'home',
-    component: HomeComponent
+    path: '',
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'pdf',
+        component: CreatePDFComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      }
+    ]
   }
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule {}
+export class HomeRoutingModule { }
